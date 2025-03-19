@@ -49,6 +49,8 @@ async function handleFile(file) {
     fileNameDisplay.textContent = `Selected File: ${file.name}`;
 
     const reader = new FileReader();
+    reader.readAsDataURL(file);
+
     reader.onload = async function (e) {
       try {
         const imageBuffer = await Jimp.read(e.target.result);
