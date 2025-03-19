@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yellow-dot-decoder.mathieurenaud.fr/sitemap.xml

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Yellow Dot Decoder | Mathieu Renaud</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Mathieu Renaud" />
+    <meta
+      name="description"
+      content="Decode yellow dot patterns hidden in printed documents. Learn how forensic tracking works in color printers and how to extract encoded information."
+    />
+    <meta
+      name="keywords"
+      content="Yellow Dot Code, Printer Tracking, Forensic Printing, Document Security, Machine Identification Code, MIC, Digital Forensics"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="tdm-reservation" content="1" />
+    <meta
+      name="tdm-policy"
+      content="https://yellow-dot-decoder.mathieurenaud.fr/assets/tdmrep.json"
+    />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Yellow Dot Decoder | Mathieu Renaud" />
+    <meta
+      property="og:description"
+      content="Decode yellow dot patterns hidden in printed documents. Learn how forensic tracking works in color printers and how to extract encoded information."
+    />
+    <meta
+      property="og:image"
+      content="https://yellow-dot-decoder.mathieurenaud.fr/assets/preview.jpg"
+    />
+    <meta
+      property="og:url"
+      content="https://yellow-dot-decoder.mathieurenaud.fr/"
+    />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Yellow Dot Decoder | Mathieu Renaud" />
+    <meta
+      name="twitter:description"
+      content="Decode yellow dot patterns hidden in printed documents. Learn how forensic tracking works in color printers and how to extract encoded information."
+    />
+    <meta
+      name="twitter:image"
+      content="https://yellow-dot-decoder.mathieurenaud.fr/assets/preview.jpg"
+    />
+    <meta name="twitter:site" content="@Mathieu_Renaud_" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Yellow Dot Decoder",
+        "url": "https://yellow-dot-decoder.mathieurenaud.fr/",
+        "author": {
+          "@type": "Person",
+          "name": "Mathieu Renaud",
+          "url": "https://resume.mathieurenaud.fr/"
+        },
+        "description": "Decode yellow dot patterns hidden in printed documents. Learn how forensic tracking works in color printers and how to extract encoded information.",
+        "image": "https://yellow-dot-decoder.mathieurenaud.fr/assets/preview.jpg",
+        "sameAs": [
+          "https://github.com/Equinoxis/yellow-dots-decoder",
+          "https://www.linkedin.com/in/mathieu-renaud-inge"
+        ],
+        "publisher": {
+          "@type": "Organization",
+          "name": "Yellow Dot Decoder",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://yellow-dot-decoder.mathieurenaud.fr/assets/favicon-32x32.png"
+          }
+        }
+      }
+    </script>
+
+    <!-- Favicon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/assets/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="/assets/safari-pinned-tab.svg"
+      color="#2b5797"
+    />
+    <meta name="msapplication-TileColor" content="#2b5797" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="canonical" href="https://yellow-dot-decoder.mathieurenaud.fr/" />
+    <base href="/" />
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jimp/0.22.8/jimp.min.js"></script>
+    <script src="image.js" defer></script>
+    <script src="grid.js" defer></script>
+  </head>
+
+  <body>
+    <header class="header">
+      <h1>Yellow Dot Decoder</h1>
+      <p>by <a href="https://resume.mathieurenaud.fr/">Mathieu Renaud</a></p>
+    </header>
+
+    <main class="main-container">
+      <div class="grid-container">
+        <h2>Dots Decoder</h2>
+        <p>Click the grid to mark yellow dots</p>
+        <div class="grid" id="grid"></div>
+        <p>Decoded Information:</p>
+        <p id="result"></p>
+      </div>
+
+      <div class="image-container">
+        <h2>Image Processing</h2>
+        <p>Load your image to find dots</p>
+        <label for="imageInput" class="file-drop-zone" id="dropZone">
+          <p class="tips">Drag & Drop an Image or Click to Upload</p>
+          <input type="file" id="imageInput" accept="image/*" hidden />
+          <p class="filename" id="fileNameDisplay">No file selected</p>
+        </label>
+        <canvas id="imageCanvas"></canvas>
+        <p>Zoom and move around to find dots pattern.</p>
+      </div>
+    </main>
+
+    <section class="theory-section">
+      <h2>Theory Behind Yellow Dot Decoding</h2>
+      <p>
+        The <strong>Yellow Dot Code</strong>, also known as the
+        <em>Machine Identification Code (MIC)</em>, is a covert tracking pattern
+        embedded in documents printed by laser printers. This system is used by
+        major manufacturers such as Xerox, HP, and Canon to encode details about
+        the printer, including its serial number, as well as the date and time
+        the document was printed.
+      </p>
+
+      <h3>Technical Specifications</h3>
+      <p>
+        The Yellow Dot Code consists of a pattern of
+        <strong>invisible yellow dots</strong> printed across a document. Each
+        dot is approximately <strong>100 to 120 micrometers</strong> in size and
+        is arranged in a structured grid. The dots are spaced at regular
+        intervals, typically every <strong>1mm to 1.5mm</strong>. This pattern
+        is repeated throughout the document to ensure that the encoded data
+        remains intact even if the document is partially scanned or damaged.
+      </p>
+      <p>
+        Since these dots are printed using
+        <strong>subtractive color encoding</strong> (yellow on a white
+        background), they are nearly invisible under normal light conditions.
+        However, they can be revealed using <strong>blue LED light</strong> or
+        processed using <strong>image enhancement algorithms</strong>.
+      </p>
+
+      <h3>Encoding Scheme</h3>
+      <p>
+        The Yellow Dot Code follows a <strong>binary encoding system</strong>,
+        where the presence of a dot represents <strong>1</strong>, and the
+        absence represents <strong>0</strong>. The encoded information is spread
+        across multiple columns, each assigned a specific function.
+      </p>
+
+      <table class="encoding-table">
+        <thead>
+          <tr>
+            <th>Column</th>
+            <th>Encodes</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Columns 10-13</td>
+            <td>Serial Number</td>
+            <td>Uniquely identifies the printer.</td>
+          </tr>
+          <tr>
+            <td>Column 7</td>
+            <td>Year</td>
+            <td>
+              Encodes the last two digits of the year (e.g., "23" for 2023).
+            </td>
+          </tr>
+          <tr>
+            <td>Column 6</td>
+            <td>Month</td>
+            <td>Encodes the month of printing (01-12).</td>
+          </tr>
+          <tr>
+            <td>Column 5</td>
+            <td>Day</td>
+            <td>Encodes the day of the month (01-31).</td>
+          </tr>
+          <tr>
+            <td>Column 4</td>
+            <td>Hour</td>
+            <td>Encodes the hour in 24-hour format (00-23).</td>
+          </tr>
+          <tr>
+            <td>Column 1</td>
+            <td>Minutes</td>
+            <td>Encodes the minutes (00-59).</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Decoding Process</h3>
+      <p>
+        Extracting information from the Yellow Dot Code involves a series of
+        steps:
+      </p>
+      <ol>
+        <li>
+          Capture the printed dots using
+          <strong>image processing techniques</strong>.
+        </li>
+        <li>
+          Convert the dot positions into a <strong>binary sequence</strong>.
+        </li>
+        <li>
+          Match the extracted bits with the corresponding
+          <strong>column encoding rules</strong>.
+        </li>
+        <li>
+          Convert binary values into decimal format to retrieve
+          <strong>human-readable data</strong>.
+        </li>
+      </ol>
+
+      <h3>Privacy and Security Concerns</h3>
+      <p>
+        The use of hidden tracking codes in printed documents raises concerns
+        about
+        <strong>privacy and surveillance</strong>. While originally introduced
+        for <strong>counterfeit prevention</strong> and
+        <strong>document authentication</strong>, critics argue that it allows
+        for <strong>undocumented tracking</strong> of individuals without their
+        knowledge or consent.
+      </p>
+      <p>Several privacy advocates have suggested countermeasures, such as:</p>
+      <ul>
+        <li>
+          Applying <strong>high-contrast color filters</strong> to disrupt dot
+          visibility.
+        </li>
+        <li>
+          Using <strong>random noise overlays</strong> to prevent accurate
+          pattern detection.
+        </li>
+        <li>
+          Developing <strong>software tools</strong> that detect and remove the
+          dots from scanned documents.
+        </li>
+      </ul>
+
+      <h3>Conclusion</h3>
+      <p>
+        The Yellow Dot Code plays a significant role in
+        <strong>forensic printing</strong> and
+        <strong>anti-counterfeiting measures</strong>. However, its secretive
+        implementation has sparked discussions on
+        <strong>digital rights and user privacy</strong>. As technology
+        advances, there is an ongoing debate about the balance between security
+        and personal privacy.
+      </p>
+    </section>
+  </body>
+</html>
