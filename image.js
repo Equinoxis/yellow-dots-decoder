@@ -74,7 +74,6 @@ async function handleFile(file) {
         console.error("Error loading image:", error);
       }
     };
-    reader.readAsArrayBuffer(file);
   } else {
     alert("Please upload a valid image file.");
   }
