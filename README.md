@@ -17,7 +17,7 @@ Yellow Dot Decoder is a web-based tool for decoding yellow dot patterns from ima
 
 ## How to Use
 
-Use the tool here: [yellow-dot-decoder.mathieurenaud.fr](https://yellow-dot-decoder.mathieurenaud.fr)
+Use the tool here: [yellow-dots-decoder.mathieurenaud.fr](https://yellow-dots-decoder.mathieurenaud.fr)
 
 1. Open the application in a browser.
 2. Upload an image using the file input.
