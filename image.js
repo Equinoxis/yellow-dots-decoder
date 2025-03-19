@@ -57,6 +57,10 @@ async function handleFile(file) {
           { apply: "green", params: [-255] },
         ]);
 
+        imageBuffer.brightness(-0.4);
+
+        imageBuffer.contrast(1);
+
         imageBuffer.getBase64(Jimp.MIME_PNG, (err, src) => {
           if (!err) {
             img.src = src;
