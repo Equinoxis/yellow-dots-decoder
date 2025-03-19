@@ -165,3 +165,25 @@ canvas.addEventListener("mouseup", () => {
 canvas.addEventListener("mouseleave", () => {
   isDragging = false;
 });
+
+canvas.addEventListener("touchstart", (e) => {
+  isDragging = true;
+  startX = e.touches[0].clientX;
+  startY = e.touches[0].clientY;
+});
+
+canvas.addEventListener("touchmove", (e) => {
+  if (isDragging) {
+    let dx = (e.touches[0].clientX - startX) * 0.6;
+    let dy = (e.touches[0].clientY - startY) * 0.6;
+    posX += dx;
+    posY += dy;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    drawImage();
+  }
+});
+
+canvas.addEventListener("touchend", () => {
+  isDragging = false;
+});
