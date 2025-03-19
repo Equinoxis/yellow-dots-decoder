@@ -112,23 +112,25 @@
     />
     <base href="/" />
 
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-JYYQB9X0TT"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-JYYQB9X0TT"></script>
-	<script>
-  	window.dataLayer = window.dataLayer || [];
-  	function gtag(){dataLayer.push(arguments);}
- 	 gtag('js', new Date());
-
-  	gtag('config', 'G-JYYQB9X0TT');
-	</script>
-
+      gtag("config", "G-JYYQB9X0TT");
+    </script>
 
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jimp/0.22.8/jimp.min.js"></script>
-    <script src="image.js" defer></script>
-    <script src="grid.js" defer></script>
+    <script src="scripts/image.js" defer></script>
+    <script src="scripts/grid.js" defer></script>
   </head>
 
   <body>
