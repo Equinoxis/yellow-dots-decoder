@@ -102,6 +102,10 @@ h2 {
   color: #007bff;
 }
 
+.information {
+  max-width: 450px;
+}
+
 .file-drop-zone {
   width: 80%;
   height: 100px;
@@ -262,6 +266,10 @@ ol {
 
   h2 {
     font-size: 1.3rem;
+  }
+
+  .information {
+    font-size: 12px;
   }
 
   .file-drop-zone {
