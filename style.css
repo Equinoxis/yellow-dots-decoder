@@ -103,7 +103,7 @@ h2 {
 }
 
 .information {
-  max-width: 450px;
+  max-width: 500px;
 }
 
 .file-drop-zone {
@@ -151,7 +151,7 @@ canvas {
 }
 
 /* ---- Theory Section Styling ---- */
-.theory-section {
+.content {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
@@ -162,36 +162,36 @@ canvas {
   text-align: left;
 }
 
-.theory-section h2 {
+.content h2 {
   font-size: 1.8rem;
   color: #007bff;
   margin-bottom: 20px;
   text-align: center;
 }
 
-.theory-section h3 {
+.content h3 {
   font-size: 1.4rem;
   color: #444;
   margin-top: 20px;
   margin-bottom: 10px;
 }
 
-.theory-section p,
-.theory-section ul,
-.theory-section ol {
+.content p,
+.content ul,
+.content ol {
   font-size: 1rem;
   color: #555;
   line-height: 1.6;
   margin-bottom: 15px;
 }
 
-.theory-section ul,
+.content ul,
 ol {
   padding-left: 40px;
 }
 
-.theory-section ul li,
-.theory-section ol li {
+.content ul li,
+.content ol li {
   margin-bottom: 8px;
 }
 
@@ -245,7 +245,7 @@ ol {
     border-bottom: 2px solid #ddd;
   }
 
-  .theory-section {
+  .content {
     padding: 20px;
   }
 }
@@ -278,15 +278,15 @@ ol {
     font-size: 16px;
   }
 
-  .theory-section h2 {
+  .content h2 {
     font-size: 1.5rem;
   }
 
-  .theory-section h3 {
+  .content h3 {
     font-size: 1.2rem;
   }
 
-  .theory-section p {
+  .content p {
     font-size: 0.95rem;
   }
 }
