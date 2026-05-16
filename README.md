@@ -17,7 +17,7 @@ The project allows you to:
 - **Vite** for dev server and production builds.
 - **Tailwind CSS v4** (`@tailwindcss/vite`) and a shared design system (ambient background, theme tokens).
 - **JavaScript (ES modules)** for grid interaction and decoding logic.
-- **Jimp.js** (CDN) for image processing in the browser.
+- **Jimp** (`jimp` on npm) for image processing in the browser.
 - **Inter Variable** (`@fontsource-variable/inter`) for typography.
 
 ## How to Use

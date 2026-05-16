@@ -1,3 +1,5 @@
+import { Jimp } from "jimp";
+
 const imageInput = document.getElementById("imageInput");
 const dropZone = document.getElementById("dropZone");
 const canvas = document.getElementById("imageCanvas");
@@ -44,37 +46,32 @@ imageInput.addEventListener("change", (event) => {
 });
 
 async function handleFile(file) {
-  if (file && file.type.startsWith("image/")) {
-    fileNameDisplay.textContent = `Selected File: ${file.name}`;
-
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onload = async function (e) {
-      try {
-        const imageBuffer = await Jimp.read(e.target.result);
-        imageBuffer.color([
-          { apply: "red", params: [-255] },
-          { apply: "green", params: [-255] },
-        ]);
-
-        imageBuffer.brightness(-0.4);
-
-        imageBuffer.contrast(1);
-
-        imageBuffer.getBase64(Jimp.MIME_PNG, (err, src) => {
-          if (!err) {
-            img.src = src;
-          } else {
-            console.error("Error processing image:", err);
-          }
-        });
-      } catch (error) {
-        console.error("Error loading image:", error);
-      }
-    };
-  } else {
+  if (!file || !file.type.startsWith("image/")) {
     alert("Please upload a valid image file.");
+    return;
+  }
+
+  fileNameDisplay.textContent = `Selected File: ${file.name}`;
+
+  try {
+    const buffer = await file.arrayBuffer();
+    const image = await Jimp.read(buffer);
+
+    image.color([
+      { apply: "red", params: [-255] },
+      { apply: "green", params: [-255] },
+    ]);
+
+    image.brightness(0.6);
+    image.contrast(1);
+
+    let src = await image.getBase64("image/png");
+    if (!src.startsWith("data:")) {
+      src = `data:image/png;base64,${src}`;
+    }
+    img.src = src;
+  } catch (error) {
+    console.error("Error loading image:", error);
   }
 }
 
