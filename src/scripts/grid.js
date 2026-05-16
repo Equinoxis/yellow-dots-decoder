@@ -6,7 +6,7 @@ let checkboxes = Array.from({ length: rows }, () => []);
 function tableGridInit() {
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      let checkbox = document.createElement("input");
+      const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.addEventListener("change", decodePattern);
       grid.appendChild(checkbox);
@@ -35,11 +35,11 @@ function decodePattern() {
     1: "mm",
   };
 
-  let decoded = { sn: "", mm: "", hh: "", dd: "", MM: "", yyyy: "" };
+  const decoded = { sn: "", mm: "", hh: "", dd: "", MM: "", yyyy: "" };
 
   Object.keys(mappings).forEach((colNum) => {
-    let columnBits = columns[colNum].slice(1);
-    let value = columnBits.reduce(
+    const columnBits = columns[colNum].slice(1);
+    const value = columnBits.reduce(
       (acc, bit, idx) => acc + bit * 2 ** (6 - idx),
       0
     );

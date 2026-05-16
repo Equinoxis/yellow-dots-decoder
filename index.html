@@ -22,7 +22,6 @@
       content="https://yellow-dots-decoder.mathieurenaud.fr/assets/tdmrep.json"
     />
 
-    <!-- Open Graph Meta Tags -->
     <meta
       property="og:title"
       content="Yellow Dots Decoder | Machine Identification Code (MIC)"
@@ -41,7 +40,6 @@
     />
     <meta property="og:type" content="website" />
 
-    <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
@@ -85,7 +83,6 @@
       }
     </script>
 
-    <!-- Favicon -->
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -110,7 +107,7 @@
       color="#2b5797"
     />
     <meta name="msapplication-TileColor" content="#2b5797" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#4f46e5" />
 
     <link
       rel="canonical"
@@ -118,7 +115,6 @@
     />
     <base href="/" />
 
-    <!-- Google Tag Manager -->
     <script>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
@@ -131,16 +127,14 @@
         f.parentNode.insertBefore(j, f);
       })(window, document, "script", "dataLayer", "GTM-MM737ZP9");
     </script>
-    <!-- End Google Tag Manager -->
 
-    <link rel="stylesheet" href="style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jimp/0.22.8/jimp.min.js"></script>
-    <script src="scripts/image.js" defer></script>
-    <script src="scripts/grid.js" defer></script>
+    <script type="module" src="/src/main.js"></script>
   </head>
 
-  <body>
-    <!-- Google Tag Manager (noscript) -->
+  <body
+    class="relative min-h-screen bg-app-bg text-app-text antialiased transition-colors duration-200"
+  >
     <noscript
       ><iframe
         src="https://www.googletagmanager.com/ns.html?id=GTM-MM737ZP9"
@@ -149,281 +143,532 @@
         style="display: none; visibility: hidden"
       ></iframe
     ></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
-    <header class="header">
-      <h1>Yellow Dots Decoder</h1>
-      <p>by <a href="https://resume.mathieurenaud.fr/">Mathieu Renaud</a></p>
-    </header>
+    <div class="app-ambient" aria-hidden="true">
+      <div class="app-ambient__wash"></div>
+      <div class="app-ambient__blob app-ambient__blob--top"></div>
+      <div class="app-ambient__blob app-ambient__blob--bottom"></div>
+      <div class="app-ambient__blob app-ambient__blob--side"></div>
+      <div class="app-ambient__grid"></div>
+      <div class="app-ambient__grain"></div>
+    </div>
 
-    <main class="main-container">
-      <div class="grid-container">
-        <h2>Yellow Dots Decoder</h2>
-        <p>Click the grid to mark yellow dots</p>
-        <div class="grid" id="grid"></div>
-        <p>Decoded Information:</p>
-        <p id="result"></p>
-        <p class="information">
-          To use the <strong>Yellow Dots Decoder</strong>, upload an image of a
-          printed document, zoom in to locate the dots, and mark the yellow dots
-          on the grid based on the image. The tool will then extract and decode
-          the hidden <strong>Machine Identification Code (MIC)</strong> for
-          forensic analysis. 🚀
-        </p>
-      </div>
+    <div
+      class="relative z-10 mx-auto flex min-h-screen max-w-[1600px] flex-col px-3.5 pb-7 pt-5 sm:px-5 lg:px-7"
+    >
+      <header
+        class="mb-6 flex flex-col gap-5 border-b border-app-border pb-6 sm:flex-row sm:items-start sm:justify-between sm:gap-8"
+      >
+        <div class="min-w-0 flex-1">
+          <p class="app-hero-pill mb-3">Forensics · Client-side</p>
+          <h1
+            class="font-sans text-2xl font-semibold tracking-tight text-app-text sm:text-[1.75rem]"
+          >
+            Yellow Dots Decoder
+          </h1>
+          <p
+            class="mt-1.5 max-w-2xl text-sm font-medium leading-snug text-app-text"
+          >
+            Decode Machine Identification Codes (MIC) from yellow microdot
+            patterns - entirely in your browser.
+          </p>
+          <p class="mt-2 max-w-2xl text-sm leading-relaxed text-app-muted">
+            Upload a scan, enhance it to reveal dots, then mark the
+            <strong class="font-medium text-app-text">15×8 grid</strong> to
+            recover timestamp and printer serial data for analysis.
+          </p>
+          <p class="mt-2 text-xs text-app-muted">
+            By
+            <a
+              href="https://resume.mathieurenaud.fr/"
+              class="font-medium text-app-accent underline decoration-app-accent/30 underline-offset-2 transition-colors hover:text-app-accent-hover hover:decoration-app-accent-hover/50"
+              rel="noopener noreferrer"
+              >Mathieu Renaud</a
+            >
+          </p>
+        </div>
+        <div
+          class="flex shrink-0 flex-col gap-1.5 rounded-xl border border-app-border bg-app-surface-input/80 p-2 shadow-sm sm:items-end"
+        >
+          <span
+            id="theme-label"
+            class="text-xs font-semibold uppercase tracking-wider text-app-muted"
+            >Theme</span
+          >
+          <div
+            id="theme-bar"
+            class="w-full min-w-[min(100%,16.75rem)] sm:min-w-[17rem] sm:w-auto"
+            role="radiogroup"
+            aria-labelledby="theme-label"
+            title="Light, dark, or match your system appearance"
+            data-theme-mode="system"
+          >
+            <span class="theme-bar__thumb" aria-hidden="true"></span>
+            <button
+              type="button"
+              id="theme-btn-system"
+              class="theme-bar__btn theme-bar__btn--active"
+              role="radio"
+              aria-checked="true"
+              data-theme-value="system"
+              tabindex="0"
+            >
+              System
+            </button>
+            <button
+              type="button"
+              id="theme-btn-light"
+              class="theme-bar__btn"
+              role="radio"
+              aria-checked="false"
+              data-theme-value="light"
+              tabindex="-1"
+            >
+              Light
+            </button>
+            <button
+              type="button"
+              id="theme-btn-dark"
+              class="theme-bar__btn"
+              role="radio"
+              aria-checked="false"
+              data-theme-value="dark"
+              tabindex="-1"
+            >
+              Dark
+            </button>
+          </div>
+        </div>
+      </header>
 
-      <div class="image-container">
-        <h2>Image Processing</h2>
+      <main
+        class="grid flex-1 grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6 lg:content-start"
+        aria-label="Decoder and image"
+      >
+        <section
+          class="app-panel flex min-h-0 flex-col gap-4 p-3.5 text-center sm:p-4.5"
+        >
+          <div class="flex flex-col gap-1">
+            <h2 class="font-sans text-lg font-semibold text-app-text">
+              Dot grid
+            </h2>
+            <p class="text-sm text-app-muted">
+              Click cells to match yellow dots from your image.
+            </p>
+          </div>
+          <div class="mic-grid mx-auto" id="grid"></div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-app-muted">
+              Decoded
+            </p>
+            <p id="result" class="mic-result mt-1 break-all"></p>
+          </div>
+          <p
+            class="mx-auto max-w-md text-left text-sm leading-relaxed text-app-muted"
+          >
+            To use the <strong class="text-app-text">Yellow Dots Decoder</strong
+            >, upload an image of a printed document, zoom in to locate the dots,
+            and mark the yellow dots on the grid based on the image. The tool
+            will then extract and decode the hidden
+            <strong class="text-app-text">Machine Identification Code (MIC)</strong>
+            for forensic analysis.
+          </p>
+        </section>
 
-        <p>Load your image to find dots</p>
+        <section
+          class="app-panel flex min-h-0 flex-col items-center gap-4 p-3.5 text-center sm:p-4.5"
+        >
+          <div class="flex flex-col gap-1">
+            <h2 class="font-sans text-lg font-semibold text-app-text">
+              Image processing
+            </h2>
+            <p class="text-sm text-app-muted">
+              Load a scan; red/green channels are removed to highlight yellow.
+            </p>
+          </div>
+          <label for="imageInput" class="file-drop-zone" id="dropZone">
+            <p class="font-semibold text-app-text">Drag &amp; drop or click</p>
+            <input type="file" id="imageInput" accept="image/*" hidden />
+            <p class="text-xs text-app-muted" id="fileNameDisplay">
+              No file selected
+            </p>
+          </label>
+          <canvas id="imageCanvas" class="mic-canvas" width="600" height="400"></canvas>
+          <p class="text-sm text-app-muted">
+            Scroll to zoom, drag to pan on the canvas.
+          </p>
+        </section>
+      </main>
 
-        <label for="imageInput" class="file-drop-zone" id="dropZone">
-          <p class="tips">Drag & Drop an Image or Click to Upload</p>
-          <input type="file" id="imageInput" accept="image/*" hidden />
-          <p class="filename" id="fileNameDisplay">No file selected</p>
-        </label>
+      <article
+        id="yellow-dots-guide"
+        class="seo-doc app-panel mt-12 overflow-hidden p-4 sm:p-6 lg:p-8"
+        aria-labelledby="seo-doc-heading"
+      >
+        <header class="seo-doc__header">
+          <h2 id="seo-doc-heading" class="seo-doc__title">
+            Yellow dots and Machine Identification Codes (MIC)
+          </h2>
+          <p class="seo-doc__lede">
+            How printer tracking patterns work, how this in-browser decoder fits
+            in, and what the grid columns mean - for education and forensic
+            awareness.
+          </p>
+        </header>
 
-        <canvas id="imageCanvas"></canvas>
+        <nav class="seo-doc-toc" aria-label="Guide table of contents">
+          <p class="seo-doc-toc__label">On this page</p>
+          <ul class="seo-doc-toc__list">
+            <li>
+              <a class="seo-doc-toc__link" href="#mic-overview"
+                >MIC and yellow dot decoding</a
+              >
+            </li>
+            <li>
+              <a class="seo-doc-toc__link" href="#technical-specifications"
+                >Technical specifications</a
+              >
+            </li>
+            <li>
+              <a class="seo-doc-toc__link" href="#encoding-scheme"
+                >Encoding scheme</a
+              >
+            </li>
+            <li>
+              <a class="seo-doc-toc__link" href="#decoding-process"
+                >Decoding process</a
+              >
+            </li>
+            <li>
+              <a class="seo-doc-toc__link" href="#privacy-security"
+                >Privacy and security</a
+              >
+            </li>
+            <li>
+              <a class="seo-doc-toc__link" href="#conclusion">Conclusion</a>
+            </li>
+            <li>
+              <a class="seo-doc-toc__link" href="#frequently-asked-questions"
+                >FAQ</a
+              >
+            </li>
+            <li>
+              <a class="seo-doc-toc__link" href="#connect-and-source"
+                >Connect and source</a
+              >
+            </li>
+          </ul>
+        </nav>
 
-        <p>Zoom and move around to find dots pattern.</p>
-      </div>
-    </main>
+        <div class="seo-doc__body">
+          <section id="mic-overview" class="seo-doc-section">
+            <h3 class="seo-doc-h3">
+              Machine Identification Code (MIC) and yellow dot decoding
+            </h3>
+            <p>
+              The <strong>Yellow Dot Code</strong>, also known as the
+              <em>Machine Identification Code (MIC)</em>, is a covert tracking
+              pattern embedded in documents printed by laser printers. This
+              system is used by major manufacturers such as Xerox, HP, and Canon
+              to encode details about the printer, including its serial number, as
+              well as the date and time the document was printed. The
+              <strong>Machine Identification Code</strong> plays a crucial role in
+              <strong>printer forensics</strong> and
+              <strong>document tracking</strong>.
+            </p>
+          </section>
 
-    <section class="theory-section content">
-      <h2>
-        Understand <strong>Machine Identification Code (MIC)</strong> and <br />
-        <strong>Yellow Dot Decoding</strong>
-      </h2>
-      <p>
-        The <strong>Yellow Dot Code</strong>, also known as the
-        <em>Machine Identification Code (MIC)</em>, is a covert tracking pattern
-        embedded in documents printed by laser printers. This system is used by
-        major manufacturers such as Xerox, HP, and Canon to encode details about
-        the printer, including its serial number, as well as the date and time
-        the document was printed. The
-        <strong>Machine Identification Code</strong> plays a crucial role in
-        <strong>printer forensics</strong> and
-        <strong>document tracking</strong>.
-      </p>
+          <section id="technical-specifications" class="seo-doc-section">
+            <h3 class="seo-doc-h3">Technical specifications</h3>
+            <p>
+              The <strong>Yellow Dot Code</strong> consists of a pattern of
+              <strong>invisible yellow dots</strong> printed across a document.
+              Each dot is approximately
+              <strong>100 to 120 micrometers</strong> in size and is arranged in
+              a structured grid. The dots are spaced at regular intervals,
+              typically every <strong>1mm to 1.5mm</strong>. This pattern is
+              repeated throughout the document to ensure that the encoded data
+              remains intact even if the document is partially scanned or
+              damaged.
+            </p>
+            <p>
+              These dots, forming part of the
+              <strong>Machine Identification Code</strong>, are printed using
+              <strong>subtractive color encoding</strong> (yellow on a white
+              background), making them nearly invisible under normal light
+              conditions. However, they can be revealed using
+              <strong>blue LED light</strong> or processed using
+              <strong>image enhancement algorithms</strong>, which are commonly
+              used in <strong>digital forensics</strong> to extract embedded data.
+            </p>
+          </section>
 
-      <h3>Technical Specifications</h3>
-      <p>
-        The <strong>Yellow Dot Code</strong> consists of a pattern of
-        <strong>invisible yellow dots</strong> printed across a document. Each
-        dot is approximately <strong>100 to 120 micrometers</strong> in size and
-        is arranged in a structured grid. The dots are spaced at regular
-        intervals, typically every <strong>1mm to 1.5mm</strong>. This pattern
-        is repeated throughout the document to ensure that the encoded data
-        remains intact even if the document is partially scanned or damaged.
-      </p>
-      <p>
-        These dots, forming part of the
-        <strong>Machine Identification Code</strong>, are printed using
-        <strong>subtractive color encoding</strong> (yellow on a white
-        background), making them nearly invisible under normal light conditions.
-        However, they can be revealed using <strong>blue LED light</strong> or
-        processed using <strong>image enhancement algorithms</strong>, which are
-        commonly used in <strong>digital forensics</strong> to extract embedded
-        data.
-      </p>
+          <section id="encoding-scheme" class="seo-doc-section">
+            <h3 class="seo-doc-h3">Encoding scheme</h3>
+            <p>
+              The <strong>Yellow Dot Code</strong> follows a
+              <strong>binary encoding system</strong>, where the presence of a dot
+              represents <strong>1</strong>, and the absence represents
+              <strong>0</strong>. The encoded information is spread across multiple
+              columns, each assigned a specific function.
+            </p>
+            <div class="seo-doc-table-wrap">
+              <table class="seo-doc-table">
+                <caption class="seo-doc-table-caption">
+                  Column roles in the dot grid
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Column</th>
+                    <th scope="col">Encodes</th>
+                    <th scope="col">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Columns 10-13</td>
+                    <td>Serial Number</td>
+                    <td>Uniquely identifies the printer.</td>
+                  </tr>
+                  <tr>
+                    <td>Column 7</td>
+                    <td>Year</td>
+                    <td>
+                      Encodes the last two digits of the year (e.g., "23" for
+                      2023).
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Column 6</td>
+                    <td>Month</td>
+                    <td>Encodes the month of printing (01-12).</td>
+                  </tr>
+                  <tr>
+                    <td>Column 5</td>
+                    <td>Day</td>
+                    <td>Encodes the day of the month (01-31).</td>
+                  </tr>
+                  <tr>
+                    <td>Column 4</td>
+                    <td>Hour</td>
+                    <td>Encodes the hour in 24-hour format (00-23).</td>
+                  </tr>
+                  <tr>
+                    <td>Column 1</td>
+                    <td>Minutes</td>
+                    <td>Encodes the minutes (00-59).</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
 
-      <h3>Encoding Scheme</h3>
-      <p>
-        The <strong>Yellow Dot Code</strong> follows a
-        <strong>binary encoding system</strong>, where the presence of a dot
-        represents <strong>1</strong>, and the absence represents
-        <strong>0</strong>. The encoded information is spread across multiple
-        columns, each assigned a specific function.
-      </p>
+          <section id="decoding-process" class="seo-doc-section">
+            <h3 class="seo-doc-h3">Decoding process</h3>
+            <p>
+              Extracting information from the
+              <strong>Machine Identification Code</strong> involves a series of steps
+              used in <strong>forensic document analysis</strong>:
+            </p>
+            <ol class="seo-doc-ol">
+              <li>
+                Capture the printed dots using
+                <strong>image processing techniques</strong>.
+              </li>
+              <li>
+                Convert the dot positions into a <strong>binary sequence</strong>.
+              </li>
+              <li>
+                Match the extracted bits with the corresponding
+                <strong>column encoding rules</strong> used in
+                <strong>printer forensics</strong>.
+              </li>
+              <li>
+                Convert binary values into decimal format to retrieve
+                <strong>human-readable data</strong>, including printer details and
+                timestamp.
+              </li>
+            </ol>
+          </section>
 
-      <table class="encoding-table">
-        <thead>
-          <tr>
-            <th>Column</th>
-            <th>Encodes</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Columns 10-13</td>
-            <td>Serial Number</td>
-            <td>Uniquely identifies the printer.</td>
-          </tr>
-          <tr>
-            <td>Column 7</td>
-            <td>Year</td>
-            <td>
-              Encodes the last two digits of the year (e.g., "23" for 2023).
-            </td>
-          </tr>
-          <tr>
-            <td>Column 6</td>
-            <td>Month</td>
-            <td>Encodes the month of printing (01-12).</td>
-          </tr>
-          <tr>
-            <td>Column 5</td>
-            <td>Day</td>
-            <td>Encodes the day of the month (01-31).</td>
-          </tr>
-          <tr>
-            <td>Column 4</td>
-            <td>Hour</td>
-            <td>Encodes the hour in 24-hour format (00-23).</td>
-          </tr>
-          <tr>
-            <td>Column 1</td>
-            <td>Minutes</td>
-            <td>Encodes the minutes (00-59).</td>
-          </tr>
-        </tbody>
-      </table>
+          <section id="privacy-security" class="seo-doc-section">
+            <h3 class="seo-doc-h3">Privacy and security concerns</h3>
+            <p>
+              The use of hidden <strong>printer tracking codes</strong> like the
+              <strong>MIC</strong> in printed documents raises concerns about
+              <strong>privacy and surveillance</strong>. While originally introduced
+              for <strong>counterfeit prevention</strong> and
+              <strong>document authentication</strong>, critics argue that it allows
+              for <strong>undocumented tracking</strong> of individuals without
+              their knowledge or consent.
+            </p>
+            <p>Several privacy advocates have suggested countermeasures, such as:</p>
+            <ul class="seo-doc-ul">
+              <li>
+                Applying <strong>high-contrast color filters</strong> to disrupt dot
+                visibility and <strong>prevent forensic tracking</strong>.
+              </li>
+              <li>
+                Using <strong>random noise overlays</strong> to prevent accurate
+                pattern detection in <strong>Machine Identification Codes</strong>.
+              </li>
+              <li>
+                Developing <strong>software tools</strong> that detect and remove
+                <strong>MIC</strong> patterns from scanned documents.
+              </li>
+            </ul>
+          </section>
 
-      <h3>Decoding Process</h3>
-      <p>
-        Extracting information from the
-        <strong>Machine Identification Code</strong> involves a series of steps
-        used in <strong>forensic document analysis</strong>:
-      </p>
-      <ol>
-        <li>
-          Capture the printed dots using
-          <strong>image processing techniques</strong>.
-        </li>
-        <li>
-          Convert the dot positions into a <strong>binary sequence</strong>.
-        </li>
-        <li>
-          Match the extracted bits with the corresponding
-          <strong>column encoding rules</strong> used in
-          <strong>printer forensics</strong>.
-        </li>
-        <li>
-          Convert binary values into decimal format to retrieve
-          <strong>human-readable data</strong>, including printer details and
-          timestamp.
-        </li>
-      </ol>
+          <section id="conclusion" class="seo-doc-section">
+            <h3 class="seo-doc-h3">Conclusion</h3>
+            <p>
+              The <strong>Machine Identification Code (MIC)</strong>, embedded within
+              the <strong>Yellow Dot Code</strong>, plays a significant role in
+              <strong>forensic printing</strong> and
+              <strong>anti-counterfeiting measures</strong>. However, its secretive
+              implementation has sparked discussions on
+              <strong>digital rights, data security, and user privacy</strong>. As
+              technology advances, there is an ongoing debate about the balance
+              between security and personal privacy.
+            </p>
+          </section>
 
-      <h3>Privacy and Security Concerns</h3>
-      <p>
-        The use of hidden <strong>printer tracking codes</strong> like the
-        <strong>MIC</strong> in printed documents raises concerns about
-        <strong>privacy and surveillance</strong>. While originally introduced
-        for <strong>counterfeit prevention</strong> and
-        <strong>document authentication</strong>, critics argue that it allows
-        for <strong>undocumented tracking</strong> of individuals without their
-        knowledge or consent.
-      </p>
-      <p>Several privacy advocates have suggested countermeasures, such as:</p>
-      <ul>
-        <li>
-          Applying <strong>high-contrast color filters</strong> to disrupt dot
-          visibility and <strong>prevent forensic tracking</strong>.
-        </li>
-        <li>
-          Using <strong>random noise overlays</strong> to prevent accurate
-          pattern detection in <strong>Machine Identification Codes</strong>.
-        </li>
-        <li>
-          Developing <strong>software tools</strong> that detect and remove
-          <strong>MIC</strong> patterns from scanned documents.
-        </li>
-      </ul>
+          <section
+            id="frequently-asked-questions"
+            class="seo-doc-section seo-doc-section--faq"
+          >
+            <h3 class="seo-doc-h3">Frequently asked questions</h3>
 
-      <h3>Conclusion</h3>
-      <p>
-        The <strong>Machine Identification Code (MIC)</strong>, embedded within
-        the <strong>Yellow Dot Code</strong>, plays a significant role in
-        <strong>forensic printing</strong> and
-        <strong>anti-counterfeiting measures</strong>. However, its secretive
-        implementation has sparked discussions on
-        <strong>digital rights, data security, and user privacy</strong>. As
-        technology advances, there is an ongoing debate about the balance
-        between security and personal privacy.
-      </p>
-    </section>
+            <h4 class="seo-doc-faq-q">What is a Yellow Dot Decoder?</h4>
+            <p class="seo-doc-faq-a">
+              A Yellow Dot Decoder is a forensic tool that helps identify Machine
+              Identification Codes (MIC) embedded in printed documents using yellow
+              microdots. These codes track printer usage.
+            </p>
 
-    <section class="faq-section content">
-      <h2>Frequently Asked Questions (FAQ)</h2>
+            <h4 class="seo-doc-faq-q">Are yellow dots visible to the naked eye?</h4>
+            <p class="seo-doc-faq-a">
+              No. Yellow dots are generally invisible under normal lighting and can
+              only be detected with special lighting or image processing techniques.
+            </p>
 
-      <h3>What is a Yellow Dot Decoder?</h3>
-      <p>
-        A Yellow Dot Decoder is a forensic tool that helps identify Machine
-        Identification Codes (MIC) embedded in printed documents using yellow
-        microdots. These codes track printer usage.
-      </p>
+            <h4 class="seo-doc-faq-q">Which printers use MIC or yellow dot codes?</h4>
+            <p class="seo-doc-faq-a">
+              Many color laser printers from manufacturers like Xerox, Canon,
+              Brother, and HP embed MIC tracking patterns by default.
+            </p>
 
-      <h3>Are yellow dots visible to the naked eye?</h3>
-      <p>
-        No. Yellow dots are generally invisible under normal lighting and can
-        only be detected with special lighting or image processing techniques.
-      </p>
+            <h4 class="seo-doc-faq-q">Is decoding yellow dots illegal?</h4>
+            <p class="seo-doc-faq-a">
+              No, decoding MIC for personal or educational purposes is not illegal.
+              However, tampering with document authenticity might be illegal in some
+              jurisdictions.
+            </p>
 
-      <h3>Which printers use MIC or yellow dot codes?</h3>
-      <p>
-        Many color laser printers from manufacturers like Xerox, Canon, Brother,
-        and HP embed MIC tracking patterns by default.
-      </p>
+            <h4 class="seo-doc-faq-q">Why use a Yellow Dot Decoder?</h4>
+            <p class="seo-doc-faq-a">
+              Whether you're a digital forensics expert or a privacy advocate,
+              decoding MIC patterns from printed pages helps you stay informed about
+              printer tracking methods...
+            </p>
+          </section>
 
-      <h3>Is decoding yellow dots illegal?</h3>
-      <p>
-        No, decoding MIC for personal or educational purposes is not illegal.
-        However, tampering with document authenticity might be illegal in some
-        jurisdictions.
-      </p>
+          <section id="connect-and-source" class="seo-doc-section">
+            <h3 class="seo-doc-h3">Connect and source</h3>
+            <p>You can find more about the author and follow his work here:</p>
+            <ul class="seo-doc-ul">
+              <li>
+                <strong>Website</strong>:
+                <a
+                  href="https://resume.mathieurenaud.fr"
+                  class="seo-doc-a"
+                  target="_blank"
+                  rel="noopener"
+                  >https://resume.mathieurenaud.fr</a
+                >
+              </li>
+              <li>
+                <strong>GitHub</strong>:
+                <a
+                  href="https://github.com/Equinoxis"
+                  class="seo-doc-a"
+                  target="_blank"
+                  rel="noopener"
+                  >https://github.com/Equinoxis</a
+                >
+              </li>
+              <li>
+                <strong>LinkedIn</strong>:
+                <a
+                  href="https://www.linkedin.com/in/mathieu-renaud-inge"
+                  class="seo-doc-a"
+                  target="_blank"
+                  rel="noopener"
+                  >https://www.linkedin.com/in/mathieu-renaud-inge</a
+                >
+              </li>
+            </ul>
+            <p>
+              View the source code of this printer tracking dots decoder on GitHub:
+              <a
+                href="https://github.com/Equinoxis/yellow-dots-decoder"
+                class="seo-doc-a"
+                target="_blank"
+                rel="noopener"
+                >https://github.com/Equinoxis/yellow-dots-decoder</a
+              >
+            </p>
+          </section>
 
-      <h3>Why Use a Yellow Dot Decoder?</h3>
-      <p>
-        Whether you're a digital forensics expert or a privacy advocate,
-        decoding MIC patterns from printed pages helps you stay informed about
-        printer tracking methods...
-      </p>
-    </section>
+          <footer class="seo-doc-footer">
+            <p>
+              This guide is for education and forensic awareness only. Always respect
+              applicable laws and do not use tools to falsify documents.
+            </p>
+          </footer>
+        </div>
+      </article>
 
-    <section class="social-section content">
-      <h2>Connect with Mathieu Renaud</h2>
-      <p>You can find more about me and follow my work here:</p>
-      <ul>
-        <li>
-          <strong>Website</strong>:
+      <footer
+        class="mt-10 border-t border-app-border pt-5 text-sm text-app-muted"
+        aria-label="Author and links"
+      >
+        <p class="leading-relaxed">
+          Connect with
+          <strong class="font-medium text-app-text">Mathieu Renaud</strong>
+          <span class="text-app-border-strong"> · </span>
           <a
-            href="https://resume.mathieurenaud.fr"
-            target="_blank"
-            rel="noopener"
-            >https://resume.mathieurenaud.fr</a
+            href="https://mathieurenaud.fr"
+            class="text-app-accent underline decoration-app-accent/30 underline-offset-2 transition-colors hover:text-app-accent-hover hover:decoration-app-accent-hover/50"
+            rel="noopener noreferrer"
+            >Website</a
           >
-        </li>
-        <li>
-          <strong>GitHub</strong>:
-          <a href="https://github.com/Equinoxis" target="_blank" rel="noopener"
-            >https://github.com/Equinoxis</a
+          <span class="text-app-border-strong"> · </span>
+          <a
+            href="https://github.com/Equinoxis"
+            class="text-app-accent underline decoration-app-accent/30 underline-offset-2 transition-colors hover:text-app-accent-hover hover:decoration-app-accent-hover/50"
+            rel="noopener noreferrer"
+            >GitHub</a
           >
-        </li>
-        <li>
-          <strong>LinkedIn</strong>:
+          <span class="text-app-border-strong"> · </span>
           <a
             href="https://www.linkedin.com/in/mathieu-renaud-inge"
-            target="_blank"
-            rel="noopener"
-            >https://www.linkedin.com/in/mathieu-renaud-inge</a
+            class="text-app-accent underline decoration-app-accent/30 underline-offset-2 transition-colors hover:text-app-accent-hover hover:decoration-app-accent-hover/50"
+            rel="noopener noreferrer"
+            >LinkedIn</a
           >
-        </li>
-      </ul>
+          <span class="text-app-border-strong"> · </span>
+          <button
+            type="button"
+            data-cc="show-preferencesModal"
+            class="cursor-pointer border-0 bg-transparent p-0 text-app-accent underline decoration-app-accent/30 underline-offset-2 transition-colors hover:text-app-accent-hover hover:decoration-app-accent-hover/50"
+          >
+            Cookie settings
+          </button>
+        </p>
+      </footer>
+    </div>
 
-      <p>
-        View the source code of this Printer tracking dots decoder on GitHub:
-        <a
-          href="https://github.com/Equinoxis/yellow-dots-decoder"
-          target="_blank"
-          rel="noopener"
-          >https://github.com/Equinoxis/yellow-dots-decoder</a
-        >
-      </p>
-    </section>
-
-    <!-- Start Ko-fi banner -->
     <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
     <script>
       kofiWidgetOverlay.draw("equinoxis", {
@@ -433,6 +678,24 @@
         "floating-chat.donateButton.text-color": "#323842",
       });
     </script>
-    <!-- End Ko-fi banner -->
+    <style>
+      .floatingchat-container-wrap {
+        left: unset;
+        right: 16px;
+      }
+      .floatingchat-container-wrap-mobi {
+        left: unset;
+        right: 16px;
+        width: 50%;
+      }
+      .floating-chat-kofi-popup-iframe-mobi {
+        left: unset;
+        right: 16px;
+      }
+      .floating-chat-kofi-popup-iframe {
+        left: unset;
+        right: 16px;
+      }
+    </style>
   </body>
 </html>

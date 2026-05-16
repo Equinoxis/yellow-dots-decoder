@@ -2,7 +2,7 @@
 
 ## Overview
 
-Yellow Dot Decoder is a web-based tool for decoding yellow dot patterns from images. The project allows users to:
+Yellow Dot Decoder is a web-based tool for decoding yellow dot patterns from images. The project allows you to:
 
 - Upload an image.
 - Process the image by removing red and green channels.
@@ -12,8 +12,11 @@ Yellow Dot Decoder is a web-based tool for decoding yellow dot patterns from ima
 
 ## Technologies Used
 
-- **JavaScript (Vanilla)** for grid interaction and decoding logic.
-- **Jimp.js** for image processing.
+- **Vite** for dev server and production builds.
+- **Tailwind CSS v4** (`@tailwindcss/vite`) and a shared design system (ambient background, theme tokens).
+- **JavaScript (ES modules)** for grid interaction and decoding logic.
+- **Jimp.js** (CDN) for image processing in the browser.
+- **Inter Variable** (`@fontsource-variable/inter`) for typography.
 
 ## How to Use
 
@@ -25,9 +28,28 @@ Use the tool here: [yellow-dots-decoder.mathieurenaud.fr](https://yellow-dots-de
 4. Click on the grid to match the pattern.
 5. View the decoded information below the grid.
 
-## Installation
+## Installation & development
 
-No installation is required. Simply open the `index.html` file in a browser.
+```bash
+npm install
+npm run dev
+```
+
+Open the URL Vite prints (usually `http://localhost:5173`).
+
+## Production build
+
+```bash
+npm run build
+```
+
+Static output is written to **`dist/`**. Deploy the contents of `dist/` to your host (same layout as the live site: `index.html`, hashed assets under `dist/assets/`, and files from `public/` such as `robots.txt` and `public/assets/*`).
+
+Preview the build locally:
+
+```bash
+npm run preview
+```
 
 ## Author
 
