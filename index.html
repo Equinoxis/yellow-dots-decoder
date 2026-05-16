@@ -43,7 +43,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Yellow Dot Decoder | Machine Identification Code (MIC) | Mathieu Renaud"
+      content="Yellow Dots Decoder | Machine Identification Code (MIC)"
     />
     <meta
       name="twitter:description"
@@ -58,28 +58,141 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Yellow Dot Decoder",
-        "url": "https://yellow-dots-decoder.mathieurenaud.fr/",
-        "author": {
-          "@type": "Person",
-          "name": "Mathieu Renaud",
-          "url": "https://resume.mathieurenaud.fr/"
-        },
-        "description": "Decode yellow dot patterns and Machine Identification Codes (MIC) hidden in printed documents. Learn about forensic tracking in color printers and how to extract encoded information.",
-        "image": "https://yellow-dots-decoder.mathieurenaud.fr/assets/preview.jpg",
-        "sameAs": [
-          "https://github.com/Equinoxis/yellow-dots-decoder",
-          "https://www.linkedin.com/in/mathieu-renaud-inge"
-        ],
-        "publisher": {
-          "@type": "Organization",
-          "name": "Yellow Dot Decoder",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://yellow-dots-decoder.mathieurenaud.fr/assets/favicon-32x32.png"
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://yellow-dots-decoder.mathieurenaud.fr/#website",
+            "name": "Yellow Dots Decoder",
+            "url": "https://yellow-dots-decoder.mathieurenaud.fr/",
+            "author": {
+              "@type": "Person",
+              "name": "Mathieu Renaud",
+              "url": "https://resume.mathieurenaud.fr/"
+            },
+            "description": "Decode yellow dot patterns and Machine Identification Codes (MIC) hidden in printed documents. Learn about forensic tracking in color printers and how to extract encoded information.",
+            "image": "https://yellow-dots-decoder.mathieurenaud.fr/assets/preview.jpg",
+            "sameAs": [
+              "https://github.com/Equinoxis/yellow-dots-decoder",
+              "https://www.linkedin.com/in/mathieu-renaud-inge"
+            ],
+            "publisher": {
+              "@id": "https://yellow-dots-decoder.mathieurenaud.fr/#publisher"
+            }
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://yellow-dots-decoder.mathieurenaud.fr/#publisher",
+            "name": "Yellow Dots Decoder",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://yellow-dots-decoder.mathieurenaud.fr/assets/favicon-32x32.png"
+            }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://yellow-dots-decoder.mathieurenaud.fr/#webpage",
+            "url": "https://yellow-dots-decoder.mathieurenaud.fr/",
+            "name": "Yellow Dots Decoder | Machine Identification Code (MIC)",
+            "description": "Yellow Dots Decoder helps you decode hidden Machine Identification Codes (MIC) in printed documents. Learn forensic printer tracking and yellow dot patterns.",
+            "isPartOf": { "@id": "https://yellow-dots-decoder.mathieurenaud.fr/#website" },
+            "about": {
+              "@type": "Thing",
+              "name": "Machine Identification Code",
+              "alternateName": ["MIC", "Yellow dot tracking", "Printer steganography"]
+            },
+            "primaryImageOfPage": {
+              "@type": "ImageObject",
+              "url": "https://yellow-dots-decoder.mathieurenaud.fr/assets/preview.jpg"
+            },
+            "mainEntity": { "@id": "https://yellow-dots-decoder.mathieurenaud.fr/#faq" }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://yellow-dots-decoder.mathieurenaud.fr/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is a Yellow Dot Decoder?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "A Yellow Dot Decoder is a forensic tool that helps identify Machine Identification Codes (MIC) embedded in printed documents using yellow microdots. These codes record printer-related metadata such as serial number and print time."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Are yellow dots visible to the naked eye?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Yellow dots are generally invisible under normal lighting and can only be detected with special lighting or image processing techniques."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Which printers use MIC or yellow dot codes?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Many color laser printers from manufacturers like Xerox, Canon, Brother, and HP embed MIC tracking patterns by default. Models change over time; consult manufacturer documentation and independent references such as the Electronic Frontier Foundation's printer resources."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is decoding yellow dots illegal?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No, decoding MIC for personal or educational purposes is not illegal. However, tampering with document authenticity might be illegal in some jurisdictions."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why use a Yellow Dot Decoder?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Whether you work in digital forensics, journalism, security research, or personal privacy, decoding MIC patterns from scans helps you verify whether a print contains tracking dots and understand what metadata may have been encoded."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What are printer yellow dots?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Printer yellow dots are a faint microdot grid printed on many color laser pages. Together they can encode a Machine Identification Code (MIC) linking the sheet to a device and often a print date and time."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How can I see yellow dots without software?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "You can sometimes reveal them with strong magnification and oblique lighting; pure blue light can make yellow toner appear darker. For reliable analysis, a high-resolution lossless scan or photograph and channel enhancement (as in this page's tool) are usually easier than the naked eye alone."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do all color laser printers print a Machine Identification Code?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Many do, but not all devices or drivers print the same pattern—or any pattern."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does this decoder work on phone photos of a printout?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, if the dots are resolved clearly enough: use the highest practical resolution, steady focus, even lighting, and lossless formats when possible. Very soft or heavily compressed images may not be good enough to align the 15×8 grid accurately."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why might decoded data look wrong or incomplete?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Common causes include a different vendor grid or bit layout than this decoder assumes, misaligned clicks on the grid, damaged or skewed prints, JPEG compression artifacts, or low scan resolution. This tool decodes a fixed column mapping only."
+                }
+              }
+            ]
           }
-        }
+        ]
       }
     </script>
 
@@ -242,15 +355,17 @@
       </header>
 
       <main
+        id="decoder-tool"
         class="grid flex-1 grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6 lg:content-start"
         aria-label="Decoder and image"
       >
         <section
+          id="decoder-grid-panel"
           class="app-panel flex min-h-0 flex-col gap-4 p-3.5 text-center sm:p-4.5"
         >
           <div class="flex flex-col gap-1">
             <h2 class="font-sans text-lg font-semibold text-app-text">
-              Yellow Dots Decoder
+              Mark the 15×8 pattern
             </h2>
             <p class="text-sm text-app-muted">
               Click cells to match yellow dots from your image.
@@ -276,6 +391,7 @@
         </section>
 
         <section
+          id="decoder-image-panel"
           class="app-panel flex min-h-0 flex-col items-center gap-4 p-3.5 text-center sm:p-4.5"
         >
           <div class="flex flex-col gap-1">
@@ -316,12 +432,34 @@
           </p>
         </header>
 
+        <p class="seo-doc__intro">
+          A <strong>Machine Identification Code (MIC)</strong> is metadata encoded
+          in a grid of yellow microdots on many color laser prints. This page is
+          for <strong>digital forensics</strong>, security research,
+          <strong>journalism</strong>, and anyone learning how
+          <strong>printer tracking</strong> works. The decoder runs
+          <strong>entirely in your browser</strong>: images are not uploaded to a
+          server for processing.
+        </p>
+        <div class="seo-doc-callout" role="note">
+          <p class="seo-doc-callout__p">
+            <strong>Privacy.</strong> Image enhancement and grid decoding happen
+            locally in your session. Clear the page or reload to discard loaded
+            images from memory.
+          </p>
+        </div>
+
         <nav class="seo-doc-toc" aria-label="Guide table of contents">
           <p class="seo-doc-toc__label">On this page</p>
           <ul class="seo-doc-toc__list">
             <li>
               <a class="seo-doc-toc__link" href="#mic-overview"
                 >MIC and yellow dot decoding</a
+              >
+            </li>
+            <li>
+              <a class="seo-doc-toc__link" href="#how-to-use-this-decoder"
+                >How to use this decoder</a
               >
             </li>
             <li>
@@ -332,6 +470,11 @@
             <li>
               <a class="seo-doc-toc__link" href="#encoding-scheme"
                 >Encoding scheme</a
+              >
+            </li>
+            <li>
+              <a class="seo-doc-toc__link" href="#tool-limitations"
+                >Tool limitations</a
               >
             </li>
             <li>
@@ -353,8 +496,8 @@
               >
             </li>
             <li>
-              <a class="seo-doc-toc__link" href="#connect-and-source"
-                >Connect and source</a
+              <a class="seo-doc-toc__link" href="#sources-and-further-reading"
+                >Sources and further reading</a
               >
             </li>
           </ul>
@@ -376,6 +519,49 @@
               <strong>printer forensics</strong> and
               <strong>document tracking</strong>.
             </p>
+            <p>
+              For step-by-step use of the interactive tool on this page, see
+              <a class="seo-doc-a" href="#how-to-use-this-decoder"
+                >How to use this decoder</a
+              >.
+            </p>
+          </section>
+
+          <section id="how-to-use-this-decoder" class="seo-doc-section">
+            <h3 class="seo-doc-h3">How to use this decoder</h3>
+            <p>
+              The workflow matches the two panels under
+              <a class="seo-doc-a" href="#decoder-tool">Decoder and image</a> above:
+              enhance the scan, then mark dots on the
+              <a class="seo-doc-a" href="#decoder-grid-panel">15×8 grid</a>.
+            </p>
+            <ol class="seo-doc-ol">
+              <li>
+                <strong>Upload an image</strong> in
+                <a class="seo-doc-a" href="#decoder-image-panel"
+                  >Image processing</a
+                >: drag and drop a file or click the drop zone. Use a
+                high-resolution scan or photo when possible (lossless PNG is
+                ideal).
+              </li>
+              <li>
+                <strong>Review the enhanced preview</strong>: red and green
+                channels are removed so yellow toner stands out, then brightness
+                and contrast are adjusted. Scroll on the canvas to zoom and drag to
+                pan until one full dot grid cell is legible.
+              </li>
+              <li>
+                <strong>Mark the pattern</strong>: in the grid panel, toggle each
+                cell to match a dot (filled) or blank (empty). Align the grid with
+                the same orientation as the print (read left-to-right, top row
+                first).
+              </li>
+              <li>
+                <strong>Read the decoded line</strong> under &quot;Decoded&quot;:
+                time, date, and serial fields appear as soon as the pattern matches
+                the supported column mapping.
+              </li>
+            </ol>
           </section>
 
           <section id="technical-specifications" class="seo-doc-section">
@@ -383,13 +569,18 @@
             <p>
               The <strong>Yellow Dot Code</strong> consists of a pattern of
               <strong>invisible yellow dots</strong> printed across a document.
-              Each dot is approximately
-              <strong>100 to 120 micrometers</strong> in size and is arranged in
-              a structured grid. The dots are spaced at regular intervals,
-              typically every <strong>1mm to 1.5mm</strong>. This pattern is
-              repeated throughout the document to ensure that the encoded data
-              remains intact even if the document is partially scanned or
-              damaged.
+              Published analyses (for example work cited by the
+              <a
+                class="seo-doc-a"
+                href="https://w2.eff.org/Privacy/printers/docucolor/"
+                rel="noopener noreferrer"
+                >Electronic Frontier Foundation</a
+              >) describe dots on the order of
+              <strong>roughly 100 micrometers</strong> in a repeating grid with
+              spacing around <strong>1&nbsp;mm</strong>. Exact measurements vary by
+              engine and paper; treat sizes and spacing as
+              <strong>approximate</strong> unless you calibrate against a known
+              reference.
             </p>
             <p>
               These dots, forming part of the
@@ -400,6 +591,14 @@
               <strong>blue LED light</strong> or processed using
               <strong>image enhancement algorithms</strong>, which are commonly
               used in <strong>digital forensics</strong> to extract embedded data.
+            </p>
+            <p>
+              <strong>How this tool highlights dots:</strong> in the browser, the
+              pipeline removes the red and green channels from your image, then
+              applies a darker midtone and higher contrast so yellow regions read
+              more clearly against the page. That complements (rather than
+              replaces) physical techniques such as magnification and blue
+              illumination.
             </p>
           </section>
 
@@ -412,10 +611,25 @@
               <strong>0</strong>. The encoded information is spread across multiple
               columns, each assigned a specific function.
             </p>
+            <p>
+              On many DocuColor-style layouts, the first row of the grid carries
+              <strong>parity</strong> (error-correction) bits rather than payload
+              digits; independent write-ups such as the
+              <a
+                class="seo-doc-a"
+                href="https://w2.eff.org/Privacy/printers/docucolor/"
+                rel="noopener noreferrer"
+                >EFF DocuColor tracking dot guide</a
+              >
+              explain row and column parity. <strong>This decoder</strong> reads
+              seven payload rows per column (it ignores the top row when turning
+              dots into numbers), which matches that pattern for the fields it
+              exposes.
+            </p>
             <div class="seo-doc-table-wrap">
               <table class="seo-doc-table">
                 <caption class="seo-doc-table-caption">
-                  Column roles in the dot grid
+                  Column roles in the dot grid (indices 0–14, left to right)
                 </caption>
                 <thead>
                   <tr>
@@ -426,7 +640,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Columns 10-13</td>
+                    <td>Columns 10–13</td>
                     <td>Serial Number</td>
                     <td>Uniquely identifies the printer.</td>
                   </tr>
@@ -434,32 +648,73 @@
                     <td>Column 7</td>
                     <td>Year</td>
                     <td>
-                      Encodes the last two digits of the year (e.g., "23" for
-                      2023).
+                      Encodes the last two digits of the year (e.g., &quot;23&quot;
+                      for 2023).
                     </td>
                   </tr>
                   <tr>
                     <td>Column 6</td>
                     <td>Month</td>
-                    <td>Encodes the month of printing (01-12).</td>
+                    <td>Encodes the month of printing (01–12).</td>
                   </tr>
                   <tr>
                     <td>Column 5</td>
                     <td>Day</td>
-                    <td>Encodes the day of the month (01-31).</td>
+                    <td>Encodes the day of the month (01–31).</td>
                   </tr>
                   <tr>
                     <td>Column 4</td>
                     <td>Hour</td>
-                    <td>Encodes the hour in 24-hour format (00-23).</td>
+                    <td>Encodes the hour in 24-hour format (00–23).</td>
                   </tr>
                   <tr>
                     <td>Column 1</td>
                     <td>Minutes</td>
-                    <td>Encodes the minutes (00-59).</td>
+                    <td>Encodes the minutes (00–59).</td>
                   </tr>
                 </tbody>
               </table>
+            </div>
+            <div class="seo-doc-table-wrap">
+              <table class="seo-doc-table">
+                <caption class="seo-doc-table-caption">
+                  Columns not decoded by this tool
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Column index</th>
+                    <th scope="col">Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>0, 2, 3, 8, 9, 14</td>
+                    <td>
+                      Not mapped in the current client-side decoder; they may carry
+                      manufacturer-specific or parity-related data on some devices.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="tool-limitations" class="seo-doc-section">
+            <h3 class="seo-doc-h3">Tool limitations</h3>
+            <p>
+              This page implements one <strong>manual 15×8</strong> grid and a
+              fixed set of column rules. It is a learning and analysis aid, not a
+              certified forensic instrument. Vendor layouts, bit orders, and
+              parity rules can differ; always corroborate results with additional
+              evidence when conclusions matter.
+            </p>
+            <div class="seo-doc-callout seo-doc-callout--warn" role="note">
+              <p class="seo-doc-callout__p">
+                <strong>Limits.</strong> Mis-clicks, skewed scans, heavy JPEG
+                compression, or a printer that uses a different grid will produce
+                wrong or empty fields. The output is only as accurate as your
+                image and your alignment with the pattern assumed here.
+              </p>
             </div>
           </section>
 
@@ -473,10 +728,13 @@
             <ol class="seo-doc-ol">
               <li>
                 Capture the printed dots using
-                <strong>image processing techniques</strong>.
+                <strong>image processing techniques</strong> (scan, photograph, or
+                channel enhancement as on this page).
               </li>
               <li>
-                Convert the dot positions into a <strong>binary sequence</strong>.
+                Convert the dot positions into a <strong>binary sequence</strong>
+                per column, respecting any <strong>parity row</strong> or
+                manufacturer-specific framing.
               </li>
               <li>
                 Match the extracted bits with the corresponding
@@ -502,6 +760,21 @@
               for <strong>undocumented tracking</strong> of individuals without
               their knowledge or consent.
             </p>
+            <p>
+              Reasonable objections include worry about whistleblowers or
+              sensitive sources, workplace monitoring via printed leaks, and misuse
+              of forensic claims without context. Understanding how MIC works does
+              not justify document forgery or harassment; this site is aimed at
+              transparency and defensive awareness.
+            </p>
+            <div class="seo-doc-callout seo-doc-callout--warn" role="note">
+              <p class="seo-doc-callout__p">
+                <strong>Legal.</strong> Laws vary by country. Do not use insights
+                from this guide to alter documents, mislead courts or employers, or
+                infringe others&apos; rights. When in doubt, seek qualified legal
+                advice.
+              </p>
+            </div>
             <p>Several privacy advocates have suggested countermeasures, such as:</p>
             <ul class="seo-doc-ul">
               <li>
@@ -543,7 +816,8 @@
             <p class="seo-doc-faq-a">
               A Yellow Dot Decoder is a forensic tool that helps identify Machine
               Identification Codes (MIC) embedded in printed documents using yellow
-              microdots. These codes track printer usage.
+              microdots. These codes record printer-related metadata such as serial
+              number and print time.
             </p>
 
             <h4 class="seo-doc-faq-q">Are yellow dots visible to the naked eye?</h4>
@@ -555,7 +829,10 @@
             <h4 class="seo-doc-faq-q">Which printers use MIC or yellow dot codes?</h4>
             <p class="seo-doc-faq-a">
               Many color laser printers from manufacturers like Xerox, Canon,
-              Brother, and HP embed MIC tracking patterns by default.
+              Brother, and HP embed MIC tracking patterns by default. Models change
+              over time; consult manufacturer documentation and independent
+              references such as the Electronic Frontier Foundation&apos;s printer
+              resources.
             </p>
 
             <h4 class="seo-doc-faq-q">Is decoding yellow dots illegal?</h4>
@@ -567,15 +844,91 @@
 
             <h4 class="seo-doc-faq-q">Why use a Yellow Dot Decoder?</h4>
             <p class="seo-doc-faq-a">
-              Whether you're a digital forensics expert or a privacy advocate,
-              decoding MIC patterns from printed pages helps you stay informed about
-              printer tracking methods...
+              Whether you work in digital forensics, journalism, security research,
+              or personal privacy, decoding MIC patterns from scans helps you verify
+              whether a print contains tracking dots and understand what metadata may
+              have been encoded.
+            </p>
+
+            <h4 class="seo-doc-faq-q">What are printer yellow dots?</h4>
+            <p class="seo-doc-faq-a">
+              Printer yellow dots are a faint microdot grid printed on many color
+              laser pages. Together they can encode a Machine Identification Code
+              (MIC) linking the sheet to a device and often a print date and time.
+            </p>
+
+            <h4 class="seo-doc-faq-q">
+              How can I see yellow dots without software?
+            </h4>
+            <p class="seo-doc-faq-a">
+              You can sometimes reveal them with strong magnification and oblique
+              lighting; pure blue light can make yellow toner appear darker. For
+              reliable analysis, a high-resolution lossless scan or photograph and
+              channel enhancement (as in this page&apos;s tool) are usually easier
+              than the naked eye alone.
+            </p>
+
+            <h4 class="seo-doc-faq-q">
+              Do all color laser printers print a Machine Identification Code?
+            </h4>
+            <p class="seo-doc-faq-a">
+              No. Many do, but not all devices or drivers print the same pattern—or
+              any pattern.
+            </p>
+
+            <h4 class="seo-doc-faq-q">
+              Does this decoder work on phone photos of a printout?
+            </h4>
+            <p class="seo-doc-faq-a">
+              Yes, if the dots are resolved clearly enough: use the highest practical
+              resolution, steady focus, even lighting, and lossless formats when
+              possible. Very soft or heavily compressed images may not be good enough
+              to align the 15×8 grid accurately.
+            </p>
+
+            <h4 class="seo-doc-faq-q">
+              Why might decoded data look wrong or incomplete?
+            </h4>
+            <p class="seo-doc-faq-a">
+              Common causes include a different vendor grid or bit layout than this
+              decoder assumes, misaligned clicks on the grid, damaged or skewed
+              prints, JPEG compression artifacts, or low scan resolution. This tool
+              decodes a fixed column mapping only.
             </p>
           </section>
 
-          <section id="connect-and-source" class="seo-doc-section">
-            <h3 class="seo-doc-h3">Connect and source</h3>
-            <p>You can find more about the author and follow his work here:</p>
+          <section id="sources-and-further-reading" class="seo-doc-section">
+            <h3 class="seo-doc-h3">Sources and further reading</h3>
+            <p>
+              Primary references on tracking dots and decoding methodology:
+            </p>
+            <ul class="seo-doc-ul">
+              <li>
+                <a
+                  class="seo-doc-a"
+                  href="https://w2.eff.org/Privacy/printers/docucolor/"
+                  rel="noopener noreferrer"
+                  >EFF &mdash; DocuColor tracking dot decoding guide</a
+                >
+              </li>
+              <li>
+                <a
+                  class="seo-doc-a"
+                  href="https://w2.eff.org/Privacy/printers/list.php"
+                  rel="noopener noreferrer"
+                  >EFF &mdash; Printer list (surveillance mitigation)</a
+                >
+              </li>
+              <li>
+                <a
+                  class="seo-doc-a"
+                  href="https://ydots.org/"
+                  rel="noopener noreferrer"
+                  >ydots.org &mdash; Yellow dots community resources</a
+                >
+              </li>
+            </ul>
+            <p>Author and project links:</p>
             <ul class="seo-doc-ul">
               <li>
                 <strong>Website</strong>:
@@ -583,7 +936,7 @@
                   href="https://resume.mathieurenaud.fr"
                   class="seo-doc-a"
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   >https://resume.mathieurenaud.fr</a
                 >
               </li>
@@ -593,7 +946,7 @@
                   href="https://github.com/Equinoxis"
                   class="seo-doc-a"
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   >https://github.com/Equinoxis</a
                 >
               </li>
@@ -603,7 +956,7 @@
                   href="https://www.linkedin.com/in/mathieu-renaud-inge"
                   class="seo-doc-a"
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   >https://www.linkedin.com/in/mathieu-renaud-inge</a
                 >
               </li>
@@ -614,7 +967,7 @@
                 href="https://github.com/Equinoxis/yellow-dots-decoder"
                 class="seo-doc-a"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 >https://github.com/Equinoxis/yellow-dots-decoder</a
               >
             </p>

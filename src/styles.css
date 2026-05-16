@@ -1001,6 +1001,21 @@ body {
 	color: var(--app-muted);
 }
 
+.seo-doc__intro {
+	margin: 0 auto 1rem;
+	max-width: 40rem;
+	font-size: 0.9375rem;
+	line-height: 1.7;
+	color: var(--app-text);
+	text-align: center;
+}
+
+.seo-doc__intro + .seo-doc-callout {
+	margin: 0 auto 1.5rem;
+	max-width: 40rem;
+	width: 100%;
+}
+
 .seo-doc-toc {
 	margin-bottom: 2rem;
 	padding: 1rem 1.125rem;

@@ -1,8 +1,10 @@
-# Yellow Dot Decoder
+# Yellow Dots Decoder
 
 ## Overview
 
-Yellow Dot Decoder is a web-based tool for decoding yellow dot patterns from images. The project allows you to:
+Yellow Dots Decoder is a web-based tool for decoding yellow dot patterns from images. Many color laser printers embed a **Machine Identification Code (MIC)**—a faint grid of yellow microdots—on each page; the live app includes an educational guide on [MIC and yellow dot decoding](https://yellow-dots-decoder.mathieurenaud.fr/#yellow-dots-guide).
+
+The project allows you to:
 
 - Upload an image.
 - Process the image by removing red and green channels.
