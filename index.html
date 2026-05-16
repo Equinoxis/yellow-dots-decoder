@@ -228,7 +228,11 @@
     />
     <base href="/" />
 
-    <script>
+    <script
+      type="text/plain"
+      data-category="analytics"
+      data-service="google_tag_manager"
+    >
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
         w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
@@ -248,15 +252,6 @@
   <body
     class="relative min-h-screen bg-app-bg text-app-text antialiased transition-colors duration-200"
   >
-    <noscript
-      ><iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-MM737ZP9"
-        height="0"
-        width="0"
-        style="display: none; visibility: hidden"
-      ></iframe
-    ></noscript>
-
     <div class="app-ambient" aria-hidden="true">
       <div class="app-ambient__wash"></div>
       <div class="app-ambient__blob app-ambient__blob--top"></div>

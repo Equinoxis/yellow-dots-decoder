@@ -1,9 +1,16 @@
+import { acceptedCategory, validConsent } from "vanilla-cookieconsent";
+
 const STORAGE_KEY = "yellow-dots-theme";
 
 const MODES = /** @type {const} */ (["system", "light", "dark"]);
 
+function preferencesStorageAllowed() {
+  return validConsent() && acceptedCategory("preferences");
+}
+
 /** @returns {"system" | "light" | "dark"} */
 function readStoredMode() {
+  if (!preferencesStorageAllowed()) return "system";
   const raw = localStorage.getItem(STORAGE_KEY);
   if (raw === "light" || raw === "dark" || raw === "system") return raw;
   return "system";
@@ -52,7 +59,21 @@ function attachSystemListener() {
 
 /** @param {"system" | "light" | "dark"} mode */
 function persist(mode) {
+  if (!preferencesStorageAllowed()) return;
   localStorage.setItem(STORAGE_KEY, mode);
+}
+
+/** Sync theme UI and storage when cookie consent changes (vanilla-cookieconsent). */
+export function onCookiePreferencesUpdated() {
+  if (!preferencesStorageAllowed()) {
+    localStorage.removeItem(STORAGE_KEY);
+    setHtmlClass("system");
+    syncBar("system");
+    return;
+  }
+  const mode = readStoredMode();
+  setHtmlClass(mode);
+  syncBar(mode);
 }
 
 export function initTheme() {
