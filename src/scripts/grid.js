@@ -8,6 +8,10 @@ function tableGridInit() {
     for (let j = 0; j < cols; j++) {
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
+      checkbox.setAttribute(
+        "aria-label",
+        `Yellow dot, row ${i + 1} of ${rows}, column ${j + 1} of ${cols}`
+      );
       checkbox.addEventListener("change", decodePattern);
       grid.appendChild(checkbox);
       checkboxes[i][j] = checkbox;
