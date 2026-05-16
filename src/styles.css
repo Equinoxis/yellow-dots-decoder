@@ -1281,12 +1281,29 @@ body {
 }
 
 /* --- Yellow Dots Decoder (MIC tool) --- */
+.mic-grid-wrap {
+	width: 100%;
+	max-width: 100%;
+	overflow-x: auto;
+	overflow-y: visible;
+	overscroll-behavior-x: contain;
+	-webkit-overflow-scrolling: touch;
+}
+
 .mic-grid {
+	--mic-gap: clamp(0.1875rem, 1.25vw, 0.3125rem);
+	--mic-pad: clamp(0.375rem, 2vw, 0.625rem);
 	display: grid;
-	grid-template-columns: repeat(15, 30px);
-	gap: 5px;
+	grid-template-columns: repeat(15, minmax(1.25rem, 1fr));
+	gap: var(--mic-gap);
 	justify-content: center;
-	padding: 10px;
+	box-sizing: border-box;
+	width: 100%;
+	/* Scroll when viewport cannot fit 15 columns at 20px + minimum gap/pad */
+	min-width: calc(15 * 1.25rem + 14 * 0.1875rem + 2 * 0.375rem + 2px);
+	max-width: calc(15 * 1.875rem + 14 * 0.3125rem + 2 * 0.625rem);
+	margin-inline: auto;
+	padding: var(--mic-pad);
 	border-radius: 0.75rem;
 	border: 1px solid var(--app-border);
 	background: var(--app-surface-input);
@@ -1295,9 +1312,13 @@ body {
 .mic-grid input[type="checkbox"] {
 	appearance: none;
 	margin: 0;
-	width: 30px;
-	height: 30px;
+	min-width: 0;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 1;
+	box-sizing: border-box;
 	cursor: pointer;
+	touch-action: manipulation;
 	border-radius: 0.375rem;
 	border: 1px solid var(--app-border-strong);
 	background-color: var(--app-surface);
@@ -1388,16 +1409,4 @@ body {
 
 .mic-canvas:active {
 	cursor: grabbing;
-}
-
-@media (max-width: 760px) {
-	.mic-grid {
-		grid-template-columns: repeat(15, 16px);
-		gap: 4px;
-	}
-
-	.mic-grid input[type="checkbox"] {
-		width: 16px;
-		height: 16px;
-	}
 }
